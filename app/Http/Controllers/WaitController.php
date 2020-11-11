@@ -93,9 +93,8 @@ class WaitController extends Controller
         $details = [
             'to' => $to,
             'from' => $emailFrom,
-            'subject' => $subject,
-            'title' => $subject,
-            "body"  => $send_text
+            'subject' => $subject,            
+            "body"  => $send_text,
         ];
 
         Mail::to($to)->send(new Mailer($details));
@@ -117,6 +116,8 @@ class WaitController extends Controller
             <script>
                 alert('Successfully sent!');
             </script>";
+        return redirect('/wait');
+
         return redirect('/wait');
 
     }
