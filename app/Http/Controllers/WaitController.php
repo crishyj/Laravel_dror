@@ -37,6 +37,11 @@ class WaitController extends Controller
                 'email' => $request->get('signupSrEmail'),
             ]);
             $options->save();
+            echo "
+                <script>
+                    alert('We've added you to a waiting list, and let you know when our pilot ends and your account is open.');
+                    window.history.back(-1);
+                </script>";
             return redirect('/wait');
         }       
     }
@@ -55,7 +60,7 @@ class WaitController extends Controller
         $send_text = $request->get('send_text');
         
         $emailFrom =$request->get('send_email');
-        $to = "ilonka.melochek01@gmail.com";
+        $to = "clinicnotes2014@gmail.com";
 
         $subject = "Contact Us";
 
@@ -107,7 +112,7 @@ class WaitController extends Controller
         //     ]);
         // }
 
-        
+
         // return response()->json([
         //     'status'  => true,
         //     'data'    => $details,
