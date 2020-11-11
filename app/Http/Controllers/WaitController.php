@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Wait;
 
+use Mail;
+use App\Mail\Mailer;
+
 class WaitController extends Controller
 {
     public function index(){
@@ -91,10 +94,11 @@ class WaitController extends Controller
             'to' => $to,
             'from' => $emailFrom,
             'subject' => $subject,
+            'title' => $subject,
             "body"  => $send_text
         ];
 
-        \Mail::to($request->to)->send(new \App\Mail\Mailer($details));
+        Mail::to($to)->send(new Mailer($details));
 
         if (Mail::failures()) {
             return response()->json([
