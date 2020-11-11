@@ -106,11 +106,11 @@ class WaitController extends Controller
                 'message' => 'Nnot sending mail.. retry again...'
             ]);
         }
-        return response()->json([
-            'status'  => true,
-            'data'    => $details,
-            'message' => 'Your details mailed successfully'
-        ]);
+        // return response()->json([
+        //     'status'  => true,
+        //     'data'    => $details,
+        //     'message' => 'Your details mailed successfully'
+        // ]);
 
         echo "
             <script>
@@ -118,7 +118,7 @@ class WaitController extends Controller
             </script>";
         return redirect('/wait');
 
-        return redirect('/wait');
+      
 
     }
 }
