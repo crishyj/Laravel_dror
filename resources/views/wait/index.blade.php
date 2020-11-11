@@ -13,7 +13,7 @@
             <div class="col-lg-5 col-12">
               <h1 class="display-3">Meet us,<span class="text-primary"> it's free.</span></h1>
               <p class="lead pb-4">Not just another practice management system....bla bla bla</p>
-              <form action="" >
+              <form action="{{ route('wait.store') }}" method ="POST" enctype="multipart/form-data">
                 @csrf
 
                 <div class="row mb-2">
@@ -71,7 +71,7 @@
                   <div class="info">
                     <div class="pr-md-5">
                       <div class="icon icon-shape icon-shape-primary shadow rounded-circle mb-4">
-                        <i class="ni ni-atom"></i>
+                        <i class="ni ni-favourite-28"></i>
                       </div>
                       <h5 class="display-5">Awesome features</h5>
                       <p>The kit comes with three pre-built pages to help you get started faster.</p>
@@ -80,7 +80,7 @@
                           <div class="d-flex align-items-center">
                             <div>
                               <div class="mr-3">
-                                <i class="ni ni-check-bold"></i>
+                                <i class="ni ni-favourite-28"></i>
                               </div>
                             </div>
                             <div>
@@ -516,62 +516,63 @@
             </div>
             <div class="col-lg-5 col-md-7 ml-auto mr-auto">
               <div class="card card-contact card-raised">
-                <form role="form" id="contact-form" method="post">
-                  <div class="card-header text-center">
-                    <h4 class="card-title">Contact Us</h4>
-                  </div>
-                  <div class="card-body">
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="form-group">
-                          <label>First name</label>
-                          <div class="input-group mb-4">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                <form role="form" id="contact-form" method="post" action="{{route('wait.sendmail')}}">
+                    @csrf
+                    <div class="card-header text-center">
+                        <h4 class="card-title">Contact Us</h4>
+                    </div>
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label>First name</label>
+                                <div class="input-group mb-4">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
+                                    </div>
+                                    <input class="form-control" placeholder="First Name..." aria-label="First Name..." type="text" name="send_firstname">
+                                </div>
                             </div>
-                            <input class="form-control" placeholder="First Name..." aria-label="First Name..." type="text">
-                          </div>
                         </div>
-                      </div>
-                      <div class="col-md-6 pl-2">
-                        <div class="form-group">
-                          <label>Last name</label>
-                          <div class="input-group">
-                            <div class="input-group-prepend">
-                              <span class="input-group-text"><i class="ni ni-collection"></i></span>
+                        <div class="col-md-6 pl-2">
+                            <div class="form-group">
+                                <label>Last name</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend">
+                                        <span class="input-group-text"><i class="ni ni-collection"></i></span>
+                                    </div>
+                                    <input type="text" class="form-control" placeholder="Last Name..." aria-label="Last Name..." name="send_lastname">
+                                </div>
                             </div>
-                            <input type="text" class="form-control" placeholder="Last Name..." aria-label="Last Name...">
-                          </div>
                         </div>
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Email address</label>
-                      <div class="input-group">
-                        <div class="input-group-prepend">
-                          <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                         </div>
-                        <input type="text" class="form-control" placeholder="Email Here...">
-                      </div>
-                    </div>
-                    <div class="form-group">
-                      <label>Your message</label>
-                      <textarea name="message" class="form-control" id="message" rows="6"></textarea>
-                    </div>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="custom-control custom-checkbox mt-2">
-                          <input class="custom-control-input" id="customCheck" type="checkbox">
-                          <label class="custom-control-label" for="customCheck">
-                            <span>I'm not a robot</span>
-                          </label>
+                        <div class="form-group">
+                            <label>Email address</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text"><i class="ni ni-email-83"></i></span>
+                                </div>
+                                <input type="email" class="form-control" placeholder="Email Here..." name="send_email">
+                            </div>
                         </div>
-                      </div>
-                      <div class="col-md-6">
-                        <button type="submit" class="btn btn-primary pull-right">Send Message</button>
-                      </div>
+                        <div class="form-group">
+                            <label>Your message</label>
+                            <textarea class="form-control" id="message" rows="6" name="send_text"></textarea>
+                        </div>
+                        <div class="row">
+                        <div class="col-md-6">
+                            <div class="custom-control custom-checkbox mt-2">
+                                <input class="custom-control-input" id="customCheck" type="checkbox">
+                                <label class="custom-control-label" for="customCheck">
+                                    <span>I'm not a robot</span>
+                                </label>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <button type="submit" class="btn btn-primary pull-right">Send Message</button>
+                        </div>
+                        </div>
                     </div>
-                  </div>
                 </form>
               </div>
             </div>
@@ -590,16 +591,16 @@
           </div>
           <div class="col-lg-6 text-lg-center btn-wrapper">
             <button target="_blank" href="https://twitter.com/creativetim" rel="nofollow" class="btn btn-icon-only btn-twitter rounded-circle" data-toggle="tooltip" data-original-title="Follow us">
-              <span class="btn-inner--icon"><i class="fa fa-twitter"></i></span>
+              <span class="btn-inner--icon"><i class="fab fa-twitter"></i></span>
             </button>
             <button target="_blank" href="https://www.facebook.com/CreativeTim/" rel="nofollow" class="btn-icon-only rounded-circle btn btn-facebook" data-toggle="tooltip" data-original-title="Like us">
               <span class="btn-inner--icon"><i class="fab fa-facebook"></i></span>
             </button>
             <button target="_blank" href="https://dribbble.com/creativetim" rel="nofollow" class="btn btn-icon-only btn-dribbble rounded-circle" data-toggle="tooltip" data-original-title="Follow us">
-              <span class="btn-inner--icon"><i class="fa fa-dribbble"></i></span>
+              <span class="btn-inner--icon"><i class="fab fa-dribbble"></i></span>
             </button>
             <button target="_blank" href="https://github.com/creativetimofficial" rel="nofollow" class="btn btn-icon-only btn-github rounded-circle" data-toggle="tooltip" data-original-title="Star on Github">
-              <span class="btn-inner--icon"><i class="fa fa-github"></i></span>
+              <span class="btn-inner--icon"><i class="fab fa-github"></i></span>
             </button>
           </div>
         </div>

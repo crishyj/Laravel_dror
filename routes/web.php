@@ -15,6 +15,11 @@ Route::get('/i', function () {
 	return view('pages.home');
 })->name('welcome');
 
+Route::get('/wait', 'WaitController@index')->name('wait.index');
+Route::post('/wait/create_wait', 'WaitController@store')->name('wait.store');
+Route::post('/wait/sendmail', 'WaitController@sendmail')->name('wait.sendmail');
+
+
 Route::get('/', function () {
 	return view('pages.welcome');
 })->name('welcome');
@@ -37,5 +42,8 @@ Route::group(['middleware' => 'auth'], function () {
 	
 	Route::get('{page}', ['as' => 'page.index', 'uses' => 'PageController@index']);
 });
+
+
+
 
 
