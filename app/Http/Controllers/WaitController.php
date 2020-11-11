@@ -90,22 +90,24 @@ class WaitController extends Controller
       
         mail($to,$subject,$message,$headers);
 
-        $details = [
-            'to' => $to,
-            'from' => $emailFrom,
-            'subject' => $subject,            
-            "body"  => $send_text,
-        ];
+        // $details = [
+        //     'to' => $to,
+        //     'from' => $emailFrom,
+        //     'subject' => $subject,            
+        //     "body"  => $send_text,
+        // ];
 
-        Mail::to($to)->send(new Mailer($details));
+        // Mail::to($to)->send(new Mailer($details));
 
-        if (Mail::failures()) {
-            return response()->json([
-                'status'  => false,
-                'data'    => $details,
-                'message' => 'Nnot sending mail.. retry again...'
-            ]);
-        }
+        // if (Mail::failures()) {
+        //     return response()->json([
+        //         'status'  => false,
+        //         'data'    => $details,
+        //         'message' => 'Nnot sending mail.. retry again...'
+        //     ]);
+        // }
+
+        
         // return response()->json([
         //     'status'  => true,
         //     'data'    => $details,
