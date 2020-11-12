@@ -42,10 +42,17 @@
                   <div class="col-sm-8 col-12 form-group">
                     <button class="btn btn-primary clinic_registerBtn">Submit</button>
                   </div>
-                </div>         
-
+                </div>        
               </form>
+              @if(session()->has('wait_register'))
+                <div class="alert-error">
+                    {{ session()->get('wait_register') }}
+                </div>
+            @endif
             </div>
+           
+           
+           
             <div class="col-lg-7 col-12 pl-0">
               <img class="ml-lg-5" src="../assets/img/ill/bg6-2.svg" width="100%">
             </div>
@@ -560,17 +567,26 @@
                             <textarea class="form-control" id="message" rows="6" name="send_text"></textarea>
                         </div>
                         <div class="row">
-                        <div class="col-md-6">
-                            <div class="custom-control custom-checkbox mt-2">
-                                <input class="custom-control-input" id="customCheck" type="checkbox">
-                                <label class="custom-control-label" for="customCheck">
-                                    <span>I'm not a robot</span>
-                                </label>
+                            <div class="col-md-6">
+                                <div class="custom-control custom-checkbox mt-2">
+                                    <input class="custom-control-input" id="customCheck" type="checkbox">
+                                    <label class="custom-control-label" for="customCheck">
+                                        <span>I'm not a robot</span>
+                                    </label>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <button type="submit" class="btn btn-primary pull-right">Send Message</button>
                             </div>
                         </div>
-                        <div class="col-md-6">
-                            <button type="submit" class="btn btn-primary pull-right">Send Message</button>
-                        </div>
+                        <div class="row">
+                            <div class="col-sm-12">
+                                @if(session()->has('mail_sent'))
+                                    <div class="alert-error">
+                                        {{ session()->get('mail_sent') }}
+                                    </div>
+                                @endif
+                            </div>                           
                         </div>
                     </div>
                 </form>
