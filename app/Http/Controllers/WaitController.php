@@ -93,7 +93,7 @@ class WaitController extends Controller
             "body"  => $send_text,
         ];
 
-        Mail::to($to)->send(new Mailer($details));
+        // Mail::to($to)->send(new Mailer($details));
 
         // if (Mail::failures()) {
         //     return redirect('/wait')->with('mail_sent', "Not sending mail.. retry again...");            
