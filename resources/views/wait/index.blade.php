@@ -13,9 +13,8 @@
             <div class="col-lg-5 col-12">
               <h1 class="display-3">Meet us,<span class="text-primary"> it's free.</span></h1>
               <p class="lead pb-4">Not just another practice management system....bla bla bla</p>
-              <form action="{{ route('wait.store') }}" method ="POST" enctype="multipart/form-data">
+              <form action="" method ="POST" id = "waitregister_form" enctype="multipart/form-data">
                 @csrf
-
                 <div class="row mb-2">
                   <div class="col-sm-8 col-12 from-group">
                     <label for="first_name">First Name</label>
@@ -523,7 +522,7 @@
             </div>
             <div class="col-lg-5 col-md-7 ml-auto mr-auto">
               <div class="card card-contact card-raised">
-                <form role="form" id="contact-form" method="post" action="{{route('wait.sendmail')}}">
+                <form role="form" id="contact_form" method="post" action="{{route('wait.sendmail')}}">
                     @csrf
                     <div class="card-header text-center">
                         <h4 class="card-title">Contact Us</h4>
@@ -537,7 +536,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-circle-08"></i></span>
                                     </div>
-                                    <input class="form-control" placeholder="First Name..." aria-label="First Name..." type="text" name="send_firstname">
+                                    <input class="form-control" placeholder="First Name..." aria-label="First Name..." type="text" name="send_firstname" id="send_firstname">
                                 </div>
                             </div>
                         </div>
@@ -548,7 +547,7 @@
                                     <div class="input-group-prepend">
                                         <span class="input-group-text"><i class="ni ni-collection"></i></span>
                                     </div>
-                                    <input type="text" class="form-control" placeholder="Last Name..." aria-label="Last Name..." name="send_lastname">
+                                    <input type="text" class="form-control" placeholder="Last Name..." aria-label="Last Name..." name="send_lastname" id="send_lastname">
                                 </div>
                             </div>
                         </div>
@@ -559,12 +558,12 @@
                                 <div class="input-group-prepend">
                                     <span class="input-group-text"><i class="ni ni-email-83"></i></span>
                                 </div>
-                                <input type="email" class="form-control" placeholder="Email Here..." name="send_email">
-                            </div>
+                                <input type="email" class="form-control" placeholder="Email Here..." name="send_email" id="send_email">
+                            </div> 
                         </div>
                         <div class="form-group">
                             <label>Your message</label>
-                            <textarea class="form-control" id="message" rows="6" name="send_text"></textarea>
+                            <textarea class="form-control" id="message" rows="6" name="send_text" id="send_text"></textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
@@ -576,7 +575,7 @@
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <button type="submit" class="btn btn-primary pull-right">Send Message</button>
+                                <button type="submit" class="btn btn-primary pull-right contact_send">Send Message</button>
                             </div>
                         </div>
                         <div class="row">
@@ -648,4 +647,105 @@
     </footer>
     <!-- End Of Footer Section -->
   </div>
+@endsection
+
+@section('after_script')
+<script>
+        $(document).ready(function(){         
+
+            $("#waitregister_form .clinic_registerBtn").click(function(){                e.preventDefault();
+                let _token = $('input[name=_token]').val();
+                let first_name = $('#first_name').val();
+                let last_name = $('#last_name').val();
+                let signupSrEmail = $('#signupSrEmail').val();            
+
+                var form_data =new FormData();            
+                form_data.append("_token", _token);
+                form_data.append("first_name", first_name);
+                form_data.append("last_name", last_name);
+                form_data.append("signupSrEmail", signupSrEmail);               
+
+                $.ajax({
+                    url: "{{ route('wait.store') }}",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: form_data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success : function(response) {
+                        if(response == 'success') {  
+                                              
+                        } else {
+                            let messages = response.data;
+                            if(messages.option) {                               
+                            }
+                        }
+                    },
+                    error: function(response) {
+                        $("#ajax-loading").fadeOut();
+                        if(response.responseJSON.message == 'The given data was invalid.'){                            
+                            let messages = response.responseJSON.errors;
+                            if(messages.option) {                                
+                            }
+                            alert("Something went wrong");
+                            window.location.reload();        
+                        } else {
+                            alert("Something went wrong");
+                        }
+                    }
+                });
+            });
+
+            // $("#contact_form .contact_send").click(function(){                
+            //     e.preventDefault();
+            //     let _token = $('input[name=_token]').val();
+            //     let send_firstname = $('#send_firstname').val();
+            //     let send_lastname = $('#send_lastname').val();
+            //     let send_email = $('#send_email').val();   
+            //     let send_text = $('#send_text').val();          
+
+            //     var form_data =new FormData();            
+            //     form_data.append("_token", _token);
+            //     form_data.append("send_firstname", send_firstname);
+            //     form_data.append("send_lastname", send_lastname);
+            //     form_data.append("send_email", send_email);
+            //     form_data.append("send_text", send_text);               
+
+            //     $.ajax({
+            //         url: "{{route('wait.sendmail')}}",
+            //         type: 'POST',
+            //         dataType: 'json',
+            //         data: form_data,
+            //         cache: false,
+            //         contentType: false,
+            //         processData: false,
+            //         success : function(response) {
+            //             if(response == 'success') {  
+                                              
+            //             } else {
+            //                 let messages = response.data;
+            //                 if(messages.option) {                               
+            //                 }
+            //             }
+            //         },
+            //         error: function(response) {
+            //             $("#ajax-loading").fadeOut();
+            //             if(response.responseJSON.message == 'The given data was invalid.'){                            
+            //                 let messages = response.responseJSON.errors;
+            //                 if(messages.option) {                                
+            //                 }
+            //                 alert("Something went wrong");
+            //                 window.location.reload();        
+            //             } else {
+            //                 alert("Something went wrong");
+            //             }
+            //         }
+            //     });
+            // });
+
+
+        });
+    </script>
+
 @endsection

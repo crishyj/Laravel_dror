@@ -57,6 +57,7 @@
   <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=YOUR_KEY_HERE"></script>
 
   <script src="./assets/js/argon-design-system.js?v=1.0.0" type="text/javascript"></script>
+  @yield('after_script')
   </body>
 </html>
 
