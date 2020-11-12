@@ -51,8 +51,8 @@ class WaitController extends Controller
         $send_text = $request->get('send_text');
         
         $emailFrom =$request->get('send_email');
-        $to = "clinicnotes2014@gmail.com";
-        // $to = "ilonka.melochek01@gmail.com";
+        // $to = "clinicnotes2014@gmail.com";
+        $to = "ilonka.melochek01@gmail.com";
         $subject = "Contact Us";
 
         $message = '<body >
