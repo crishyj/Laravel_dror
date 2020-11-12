@@ -17,7 +17,7 @@ Route::get('/i', function () {
 
 Route::get('/wait', 'WaitController@index')->name('wait.index');
 Route::post('/wait', 'WaitController@store')->name('wait.store');
-Route::post('/wait/sendmail', 'WaitController@sendmail')->name('wait.sendmail');
+// Route::post('/wait/sendmail', 'WaitController@sendmail')->name('wait.sendmail');
 
 
 Route::get('/', function () {

@@ -522,7 +522,7 @@
             </div>
             <div class="col-lg-5 col-md-7 ml-auto mr-auto">
               <div class="card card-contact card-raised">
-                <form role="form" id="contact_form" method="post" action="{{route('wait.sendmail')}}">
+                <form role="form" id="contact_form" method="post" action="">
                     @csrf
                     <div class="card-header text-center">
                         <h4 class="card-title">Contact Us</h4>
@@ -697,52 +697,52 @@
                 });
             });
 
-            // $("#contact_form .contact_send").click(function(){                
-            //     e.preventDefault();
-            //     let _token = $('input[name=_token]').val();
-            //     let send_firstname = $('#send_firstname').val();
-            //     let send_lastname = $('#send_lastname').val();
-            //     let send_email = $('#send_email').val();   
-            //     let send_text = $('#send_text').val();          
+            $("#contact_form .contact_send").click(function(){                
+                e.preventDefault();
+                let _token = $('input[name=_token]').val();
+                let send_firstname = $('#send_firstname').val();
+                let send_lastname = $('#send_lastname').val();
+                let send_email = $('#send_email').val();   
+                let send_text = $('#send_text').val();          
 
-            //     var form_data =new FormData();            
-            //     form_data.append("_token", _token);
-            //     form_data.append("send_firstname", send_firstname);
-            //     form_data.append("send_lastname", send_lastname);
-            //     form_data.append("send_email", send_email);
-            //     form_data.append("send_text", send_text);               
+                var form_data =new FormData();            
+                form_data.append("_token", _token);
+                form_data.append("send_firstname", send_firstname);
+                form_data.append("send_lastname", send_lastname);
+                form_data.append("send_email", send_email);
+                form_data.append("send_text", send_text);               
 
-            //     $.ajax({
-            //         url: "{{route('wait.sendmail')}}",
-            //         type: 'POST',
-            //         dataType: 'json',
-            //         data: form_data,
-            //         cache: false,
-            //         contentType: false,
-            //         processData: false,
-            //         success : function(response) {
-            //             if(response == 'success') {  
+                $.ajax({
+                    url: "{{route('wait.store')}}",
+                    type: 'POST',
+                    dataType: 'json',
+                    data: form_data,
+                    cache: false,
+                    contentType: false,
+                    processData: false,
+                    success : function(response) {
+                        if(response == 'success') {  
                                               
-            //             } else {
-            //                 let messages = response.data;
-            //                 if(messages.option) {                               
-            //                 }
-            //             }
-            //         },
-            //         error: function(response) {
-            //             $("#ajax-loading").fadeOut();
-            //             if(response.responseJSON.message == 'The given data was invalid.'){                            
-            //                 let messages = response.responseJSON.errors;
-            //                 if(messages.option) {                                
-            //                 }
-            //                 alert("Something went wrong");
-            //                 window.location.reload();        
-            //             } else {
-            //                 alert("Something went wrong");
-            //             }
-            //         }
-            //     });
-            // });
+                        } else {
+                            let messages = response.data;
+                            if(messages.option) {                               
+                            }
+                        }
+                    },
+                    error: function(response) {
+                        $("#ajax-loading").fadeOut();
+                        if(response.responseJSON.message == 'The given data was invalid.'){                            
+                            let messages = response.responseJSON.errors;
+                            if(messages.option) {                                
+                            }
+                            alert("Something went wrong");
+                            window.location.reload();        
+                        } else {
+                            alert("Something went wrong");
+                        }
+                    }
+                });
+            });
 
 
         });
