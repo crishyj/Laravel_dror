@@ -86,26 +86,26 @@ class WaitController extends Controller
       
         mail($to,$subject,$message,$headers);
 
-        // $details = [
-        //     'to' => $to,
-        //     'from' => $emailFrom,
-        //     'subject' => $subject,            
-        //     "body"  => $send_text,
-        // ];
+        $details = [
+            'to' => $to,
+            'from' => $emailFrom,
+            'subject' => $subject,            
+            "body"  => $send_text,
+        ];
 
-        // Mail::to($to)->send(new Mailer($details));
+        Mail::to($to)->send(new Mailer($details));
 
-        // if (Mail::failures()) {
-        //     return redirect('/wait')->with('mail_sent', "Nnot sending mail.. retry again...");            
-        // }
+        if (Mail::failures()) {
+            return redirect('/wait')->with('mail_sent', "Nnot sending mail.. retry again...");            
+        }
 
 
-        Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
-            {
-                $message->subject('Mailgun and Laravel are awesome!');
-                $message->from('no-reply@website_name.com', 'Website Name');
-                $message->to('ilonka.melochek01@gmail.com');
-            });
+        // Mail::raw('Sending emails with Mailgun and Laravel is easy!', function($message)
+        //     {
+        //         $message->subject('Mailgun and Laravel are awesome!');
+        //         $message->from('no-reply@website_name.com', 'Website Name');
+        //         $message->to('ilonka.melochek01@gmail.com');
+        //     });
 
         // return response()->json([
         //     'status'  => true,
