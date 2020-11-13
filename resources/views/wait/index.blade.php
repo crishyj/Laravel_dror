@@ -13,7 +13,7 @@
             <div class="col-lg-5 col-12">
               <h1 class="display-3">Meet us,<span class="text-primary"> it's free.</span></h1>
               <p class="lead pb-4">Not just another practice management system....bla bla bla</p>
-              <form action="" method ="POST" id = "waitregister_form" enctype="multipart/form-data">
+              <div action="" method ="POST" id = "waitregister_form" enctype="multipart/form-data">
                 @csrf
                 <div class="row mb-2">
                   <div class="col-sm-8 col-12 from-group">
@@ -42,16 +42,12 @@
                     <button class="btn btn-primary clinic_registerBtn">Submit</button>
                   </div>
                 </div>        
-              </form>
-              @if(session()->has('wait_register'))
-                <div class="alert-error">
-                    {{ session()->get('wait_register') }}
-                </div>
-            @endif
+              </form>      
+
+              <div class="alert-error msg">
+              </div>
+
             </div>
-           
-           
-           
             <div class="col-lg-7 col-12 pl-0">
               <img class="ml-lg-5" src="../assets/img/ill/bg6-2.svg" width="100%">
             </div>
@@ -580,11 +576,8 @@
                         </div>
                         <div class="row">
                             <div class="col-sm-12">
-                                @if(session()->has('mail_sent'))
-                                    <div class="alert-error">
-                                        {{ session()->get('mail_sent') }}
-                                    </div>
-                                @endif
+                                <div class="alert-error msg1">
+                                </div>
                             </div>                           
                         </div>
                     </div>
@@ -653,7 +646,8 @@
 <script>
         $(document).ready(function(){         
 
-            $("#waitregister_form .clinic_registerBtn").click(function(){                e.preventDefault();
+            $("#waitregister_form .clinic_registerBtn").click(function(e){    
+                e.preventDefault();
                 let _token = $('input[name=_token]').val();
                 let first_name = $('#first_name').val();
                 let last_name = $('#last_name').val();
@@ -672,23 +666,21 @@
                     data: form_data,
                     cache: false,
                     contentType: false,
-                    processData: false,
+                    processData: false,                    
                     success : function(response) {
-                        if(response == 'success') {  
-                                              
+                        if(response.status == 'success') {     
+                          $('div.msg').text(response.message); 
+                          $("#waitregister_form").trigger("reset");
                         } else {
-                            let messages = response.data;
-                            if(messages.option) {                               
-                            }
+                          $('div.msg').text(response.message); 
                         }
                     },
                     error: function(response) {
                         $("#ajax-loading").fadeOut();
-                        if(response.responseJSON.message == 'The given data was invalid.'){                            
+                        if(response.responseJSON.message == 'wrong'){                            
                             let messages = response.responseJSON.errors;
                             if(messages.option) {                                
                             }
-                            alert("Something went wrong");
                             window.location.reload();        
                         } else {
                             alert("Something went wrong");
@@ -697,7 +689,7 @@
                 });
             });
 
-            $("#contact_form .contact_send").click(function(){                
+            $("#contact_form .contact_send").click(function(e){                
                 e.preventDefault();
                 let _token = $('input[name=_token]').val();
                 let send_firstname = $('#send_firstname').val();
@@ -721,12 +713,10 @@
                     contentType: false,
                     processData: false,
                     success : function(response) {
-                        if(response == 'success') {  
-                                              
+                      if(response.status == 'success') {     
+                          $('div.msg1').text(response.message); 
                         } else {
-                            let messages = response.data;
-                            if(messages.option) {                               
-                            }
+                          $('div.msg1').text(response.message); 
                         }
                     },
                     error: function(response) {

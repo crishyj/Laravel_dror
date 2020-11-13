@@ -26,7 +26,10 @@ class WaitController extends Controller
 
           $wait = Wait::all();
           if (Wait::where('email', '=', $request->get('signupSrEmail'))->exists()) {
-              return redirect('/wait')->with('wait_register', "This user alreay registerd.");
+              return response()->json([
+                  'status'  => "wrong",
+                  'message' => "This user alreay registered."
+              ]);
           }
           else{
               $options = new Wait([
@@ -35,7 +38,11 @@ class WaitController extends Controller
                   'email' => $request->get('signupSrEmail'),
               ]);
               $options->save();
-              return redirect('/wait')->with('wait_register', "We've added you to a waiting list, and let you know when our pilot ends and your account is open.");
+
+              return response()->json([
+                    'status'  => "success",
+                    'message' => "We've added you to a waiting list, and let you know when our pilot ends and your account is open."
+                ]);
           }  
       }
       elseif($request->get('send_email')){
@@ -87,6 +94,11 @@ class WaitController extends Controller
         
           mail($to,$subject,$message,$headers);
 
+          return response()->json([
+            'status'  => "success",
+            'message' => "Your email successfully sent."
+        ]);
+
           // $details = [
           //     'to' => $to,
           //     'from' => $emailFrom,
@@ -116,7 +128,7 @@ class WaitController extends Controller
           // ]);
 
         
-          return redirect('/wait')->with('mail_sent', "Your email successfully sent.");
+          // return redirect('/wait')->with('mail_sent', "Your email successfully sent.");
 
         }             
     }    

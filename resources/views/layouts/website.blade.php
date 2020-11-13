@@ -25,6 +25,9 @@
 
   <!-- Argon Design System PRO CSS -->
   <link type="text/css" href="/assets/css/argon-design-system.css" rel="stylesheet">
+  <style>
+   
+  </style>
 </head>
 <body>
     @yield('content')
