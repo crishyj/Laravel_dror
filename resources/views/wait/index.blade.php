@@ -559,7 +559,7 @@
                         </div>
                         <div class="form-group">
                             <label>Your message</label>
-                            <textarea class="form-control" id="message" rows="6" name="send_text" id="send_text"></textarea>
+                            <textarea class="form-control" rows="6" name="send_text" id="send_text"></textarea>
                         </div>
                         <div class="row">
                             <div class="col-md-6">
