@@ -48,10 +48,11 @@
               </div>
 
             </div>
-            <div class="col-lg-7 col-12 pl-0">
+          
+          </div>
+          <div class="col-lg-7 col-12 pl-0">
               <img class="ml-lg-5" src="../assets/img/ill/bg6-2.svg" width="100%">
             </div>
-          </div>
         </div>
       </div>
     </header>

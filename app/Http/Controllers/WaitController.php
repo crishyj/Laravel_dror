@@ -57,10 +57,9 @@ class WaitController extends Controller
           $first_name = $request->get('send_firstname');
           $last_name = $request->get('send_lastname');
           $send_text = $request->get('send_text');
-          
-          $emailFrom =$request->get('send_email');
+          $emailFrom = config('app.email_address_from');
+          $reply =$request->get('send_email');
           $to = "clinicnotes2014@gmail.com";
-          // $to = "ilonka.melochek01@gmail.com";
           $subject = "Contact Us";
 
           $message = '<body >
@@ -83,6 +82,12 @@ class WaitController extends Controller
                     </tr>
                     <tr>
                       <td style="font-size:16px;  font-weight:bold"><strong>'.$send_text.'</strong></td>
+                    </tr>   
+                    <tr>
+                      <td style="font-size:14px; color:#323232">Reply :</td>
+                    </tr>
+                    <tr>
+                      <td style="font-size:16px;  font-weight:bold"><strong>'.$reply.'</strong></td>
                     </tr>                  
                   </table>
               </div>
